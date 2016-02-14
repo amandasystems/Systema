@@ -5,6 +5,7 @@ const electron = require('electron');
 const app = electron.app;  // Module to control application life.
 const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
 var fs = require('fs');
+var path = require('path');
 
 const LATEST_DB_VERSION = 1;
 
@@ -66,7 +67,7 @@ function dbMigrate(command, version) {
   }
 
   if(command === null) {
-    var migrationFile = __dirname + '/migrations/' + version + '.sql';
+    var migrationFile = path.join(__dirname, 'migrations/', (version + '.sql'));
     fs.readFile(migrationFile, function(err, data) {
       if(err) {
         console.log("Error performing migrations: " + err);
