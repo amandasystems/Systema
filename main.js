@@ -12,7 +12,9 @@ var mainWindow = null;
 // Free resources etc.
 function cleanupQuit() {
   console.log("QUITTING!");
-  db.close();
+  if(db) {
+    db.close();
+  }
 };
 
 // migrate the database as appropriate
@@ -32,6 +34,22 @@ app.on('window-all-closed', function() {
     app.quit();
   }
 });
+
+// Make sure only a single instance is ever running:
+var shouldQuit = app.makeSingleInstance(function(commandLine, workingDirectory) {
+  // Someone tried to run a second instance, we should focus our window.
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) mainWindow.restore();
+    mainWindow.focus();
+  }
+  return true;
+});
+
+if (shouldQuit) {
+  console.log("Another process already running -- quitting!");
+  app.quit();
+  return;
+}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
