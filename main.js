@@ -113,7 +113,8 @@ if (shouldQuit) {
 app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600,
-                                  title: 'Systema'});
+                                  title: 'Systema',
+                                  'auto-hide-menu-bar': true});
 
   console.log(app.getPath('userData'));
 
