@@ -66,7 +66,7 @@ function dbMigrate(command, version) {
   }
 
   if(command === null) {
-    var migrationFile = 'migrations/' + version + '.sql';
+    var migrationFile = __dirname + '/migrations/' + version + '.sql';
     fs.readFile(migrationFile, function(err, data) {
       if(err) {
         console.log("Error performing migrations: " + err);
