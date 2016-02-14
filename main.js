@@ -6,6 +6,8 @@ const app = electron.app;  // Module to control application life.
 const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
 var fs = require('fs');
 
+const LATEST_DB_VERSION = 1;
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
@@ -21,21 +23,51 @@ function cleanupQuit() {
 function dbErrorLogger(err) {
   if(err) {
     console.log("DB error: " + err);
-    return;
+  } else {
+    console.log("DB: Successfully EXEC:d query!");
   }
 
-  console.log("DB: Successfully EXEC:d query!");
+  return err;
 }
 
 // migrate the database as appropriate
-function dbMigrate(command) {
+function dbMigrate(command, version) {
   console.log("MIGRATING DB!");
+
+  // execute actual migration
   if(command) {
-    db.exec(command.toString(), dbErrorLogger);
+    db.exec(command.toString(), function maybeContinueMigration(err) {
+      dbErrorLogger(err);
+
+      if(err) {
+        app.quit();
+        return;
+      }
+
+      db.get("PRAGMA user_version", [], function extractVersion(err, data) {
+        if(err) {
+          console.log(err);
+          app.quit();
+          return;
+        }
+
+        if (data['user_version'] !== LATEST_DB_VERSION) {
+          dbMigrate(null, data['user_version']);
+        }
+
+      });
+    });
+
+    return;
+  }
+
+  if(version === null || version === undefined) {
+    version = "init";
   }
 
   if(command === null) {
-    fs.readFile('migrations/init.sql', function(err, data) {
+    var migrationFile = 'migrations/' + version + '.sql';
+    fs.readFile(migrationFile, function(err, data) {
       if(err) {
         console.log("Error performing migrations: " + err);
         app.quit();
