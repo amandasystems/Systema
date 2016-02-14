@@ -37,7 +37,10 @@ app.on('window-all-closed', function() {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({width: 800, height: 600,
+                                  title: 'Systema'});
+
+  console.log(app.getPath('userData'));
 
   db = new sqlite3.Database(':memory:',
                             sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,
