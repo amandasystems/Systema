@@ -11,8 +11,9 @@ CREATE TABLE tag_type(
 CREATE TABLE tag (
        tag_id INTEGER PRIMARY KEY,
        colour TEXT,
-       description TEXT NOT NULL UNIQUE,
-       type_id INTEGER REFERENCES tag_type(type_id)
+       description TEXT NOT NULL,
+       type_id INTEGER REFERENCES tag_type(type_id),
+       CONSTRAINT ns_unq UNIQUE (type_id, description)
 );
 
 CREATE TABLE states(
