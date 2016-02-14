@@ -1,8 +1,6 @@
 'use strict';
 
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('mydb.db');
-
 const electron = require('electron');
 const app = electron.app;  // Module to control application life.
 const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
@@ -10,6 +8,24 @@ const BrowserWindow = electron.BrowserWindow;  // Module to create native browse
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
+
+// Free resources etc.
+function cleanupQuit() {
+    console.log("QUITTING!");
+    db.close();
+};
+
+// migrate the database as appropriate
+function dbMigrate() {
+    console.log("MIGRATING DB!");
+};
+
+var db = new sqlite3.Database(':memory:',
+                              sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,
+                              dbMigrate);
+
+app.on('before-quit', cleanupQuit);
+
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
