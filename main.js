@@ -38,6 +38,7 @@ function dbMigrate(command) {
     fs.readFile('migrations/init.sql', function(err, data) {
       if(err) {
         console.log("Error performing migrations: " + err);
+        app.quit();
       }
 
       dbMigrate(data);
