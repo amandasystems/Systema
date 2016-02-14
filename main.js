@@ -4,6 +4,7 @@ var sqlite3 = require('sqlite3').verbose();
 const electron = require('electron');
 const app = electron.app;  // Module to control application life.
 const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
+var fs = require('fs');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -15,11 +16,34 @@ function cleanupQuit() {
   if(db) {
     db.close();
   }
-};
+}
+
+function dbErrorLogger(err) {
+  if(err) {
+    console.log("DB error: " + err);
+    return;
+  }
+
+  console.log("DB: Successfully EXEC:d query!");
+}
 
 // migrate the database as appropriate
-function dbMigrate() {
+function dbMigrate(command) {
   console.log("MIGRATING DB!");
+  if(command) {
+    db.exec(command.toString(), dbErrorLogger);
+  }
+
+  if(command === null) {
+    fs.readFile('migrations/init.sql', function(err, data) {
+      if(err) {
+        console.log("Error performing migrations: " + err);
+      }
+
+      dbMigrate(data);
+    });
+  }
+
 };
 
 var db = null;

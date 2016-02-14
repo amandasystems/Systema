@@ -6,10 +6,10 @@
   "scripts": {
     "start": "electron main.js"
   },
-    "dependencies" : {
-       "sqlite3": "^3.1.0"
-    },
-    "devDependencies": {
+  "dependencies" : {
+    "sqlite3": "^3.1.0"
+  },
+  "devDependencies": {
     "electron-prebuilt": "^0.36.0"
   }
 }
