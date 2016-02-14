@@ -19,7 +19,7 @@ CREATE TABLE tag (
 CREATE TABLE states(
        state_id INTEGER PRIMARY KEY,
        next_state_id INTEGER,
-       is_done BOOLEAN,
+       description TEXT NOT NULL,
        colour TEXT
 );
 
@@ -87,5 +87,12 @@ INSERT INTO tag_type(type_id, description) VALUES(2, 'user');
 -- Set up system tags
 INSERT INTO tag(type_id, description) VALUES(0, 'inbox');
 INSERT INTO tag(type_id, description) VALUES(0, 'starred');
+
+-- Default TODO states
+INSERT INTO states(state_id, description, next_state_id, colour) VALUES(0, 'DONE', NULL, 'green');
+INSERT INTO states(state_id, description, next_state_id, colour) VALUES(1, 'TODO', 0, 'red');
+INSERT INTO states(state_id, description, next_state_id, colour) VALUES(2, 'WAITING', 0, 'blue');
+INSERT INTO states(state_id, description, next_state_id, colour) VALUES(3, 'CANCELLED', NULL, 'pink');
+
 
 END TRANSACTION;
