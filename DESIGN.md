@@ -9,7 +9,7 @@
 
 ## Concepts
 - Everything is a note, but some notes are special (projects, events, tasks)
-- All tasks/projets/notes are enumerated globally uniquely
+- All tasks/projects/notes are enumerated globally uniquely
 - #NN is a reference (link) to task #NN
 - Tags have 3 namespaces: system (inbox), list ("w32", "places to visit"), generic (all other tags)
 
