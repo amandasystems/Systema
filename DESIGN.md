@@ -1,7 +1,7 @@
 ## UI, DB etc
-- DB is stored in the user's home directory (SQLite)
 - On start-up, determine if migrations need to happen. If so, run them.
-- DB is run on main thread, communication with IPC
+- SQLite DB is invoked directly from the Renderer thread (it seems to work?)
+- The UI should be simple, non-ugly, and keyboard-friendly
 
 ## Sync and serialization
 - Sync is done via serialization to JSON
