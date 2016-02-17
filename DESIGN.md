@@ -14,6 +14,6 @@
 - Tags have 3 namespaces: system (inbox), list ("w32", "places to visit"), generic (all other tags)
 
 ### Views
-- A view is a stored query
+- A view is a stored query (like an agenda command in org-mode)
 - A list is a stored query matching only a tag (in a special namespace)
 - The inbox is a special stored query that is always available
