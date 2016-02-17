@@ -1,4 +1,7 @@
 var sqlite3 = require('sqlite3').verbose();
+//var jQuery = require('jquery');
+//var bootstrap = require('bootstrap');
+var React = require('react');
 const ipcRenderer = require('electron').ipcRenderer;
 const remote = require('electron').remote;
 const DB_FILE = remote.getGlobal('DB_FILE');
