@@ -9,6 +9,8 @@ var path = require('path');
 
 const LATEST_DB_VERSION = 1;
 
+global['DB_FILE'] = path.join(app.getPath('userData'), 'systema.sqlite');
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
@@ -31,54 +33,78 @@ function dbErrorLogger(err) {
   return err;
 }
 
-// migrate the database as appropriate
-function dbMigrate(command, version) {
-  console.log("MIGRATING DB!");
+/**
+ * Determine the current DB version, and invoke the callbac with the
+ * version number and error code (if any).
+ */
+function getDbVersion(callback) {
+  db.get("PRAGMA user_version", [],
+         function passOnVersion(err, data) {
+           if(err) {
+             callback(err, data);
+           } else {
+             callback(err, data['user_version']);
+           }
+         });
+}
 
-  // execute actual migration
-  if(command) {
-    db.exec(command.toString(), function maybeContinueMigration(err) {
-      dbErrorLogger(err);
-
-      if(err) {
-        app.quit();
-        return;
-      }
-
-      db.get("PRAGMA user_version", [], function extractVersion(err, data) {
-        if(err) {
-          console.log(err);
-          app.quit();
-          return;
-        }
-
-        if (data['user_version'] !== LATEST_DB_VERSION) {
-          dbMigrate(null, data['user_version']);
-        }
-
-      });
-    });
-
-    return;
-  }
-
-  if(version === null || version === undefined) {
+/**
+ * Actually perform the migration from a given version.
+ * The callback is given an error, if any.
+ */
+function performMigration(version, dbCallback) {
+  if(version == null || version == 0) {
     version = "init";
   }
 
-  if(command === null) {
-    var migrationFile = path.join(__dirname, 'migrations/', (version + '.sql'));
-    fs.readFile(migrationFile, function(err, data) {
-      if(err) {
-        console.log("Error performing migrations: " + err);
-        app.quit();
-      }
+  var migrationFile = path.join(__dirname, 'migrations/', (version + '.sql'));
+  fs.readFile(migrationFile, function(err, data) {
+    if(err) {
+      console.log("Error reading migrations file: " + err);
+      app.quit();
+    }
 
-      dbMigrate(data);
-    });
+    db.exec(data.toString(), dbCallback);
+  });
+}
+
+/**
+ * Keep running migrations if the version is too low.
+ */
+function chainMigrations(error) {
+  if(error) {
+    console.log("Error performing chained migration: " + error);
+    return;
   }
 
-};
+  getDbVersion(maybeMigrate);
+}
+
+/**
+ * Possibly perform migrations on the database.
+ * Short-circuits on error, otherwise continues migrating until
+ * migrations are completed.
+ */
+function maybeMigrate(err, version) {
+  if(err) {
+    console.log("Error migrating DB! " + err);
+    return;
+  }
+
+  console.log("Performing migration for DB version " + version);
+
+  if(version < LATEST_DB_VERSION) {
+    console.log("Migration needed!");
+    performMigration(version, chainMigrations);
+  } else {
+    console.log("Migration not needed!");
+    console.log("Done migrating -- closing DB!");
+    db.close();
+    db = null;
+    mainWindow.webContents.send('db-migration-complete', version);
+  }
+
+}
 
 var db = null;
 
@@ -117,11 +143,11 @@ app.on('ready', function() {
                                   title: 'Systema',
                                   'auto-hide-menu-bar': true});
 
-  console.log(app.getPath('userData'));
-
-  db = new sqlite3.Database(':memory:',
+  /* FIXME should be a file, should be callback from whatever ensures
+   the config dir exists.*/
+  db = new sqlite3.Database(DB_FILE,
                             sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,
-                            dbMigrate);
+                            chainMigrations);
 
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/index.html');
