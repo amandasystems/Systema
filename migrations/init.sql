@@ -26,11 +26,7 @@ CREATE TABLE states(
 CREATE TABLE note(
        note_id INTEGER PRIMARY KEY,
        is_archived BOOLEAN,
-       description TEXT,
-       deadline INTEGER,
-       scheduled INTEGER,
-       scheduled_repeat DATETIME,
-       deadline_repeat DATETIME
+       description TEXT
 );
 
 --
@@ -56,12 +52,14 @@ CREATE TABLE note_tag(
 
 CREATE TABLE event_types(
        event_type_id INTEGER PRIMARY KEY,
-       title TEXT UNIQUE NOT NULL
+       description TEXT UNIQUE NOT NULL
 );
 
 CREATE TABLE event(
        note_id INTEGER PRIMARY KEY REFERENCES note(note_id) ON DELETE CASCADE,
-       event_type_id INTEGER REFERENCES event_types(event_type_id)
+       event_type_id INTEGER REFERENCES event_types(event_type_id),
+       event_date DATETIME,
+       event_date_repeat TEXT
 );
 
 CREATE TABLE task(
@@ -69,7 +67,11 @@ CREATE TABLE task(
        effort INTEGER, -- in minutes
        state_id INTEGER REFERENCES states(state_id),
        important BOOLEAN,
-       urgent BOOLEAN
+       urgent BOOLEAN,
+       deadline INTEGER,
+       scheduled INTEGER,
+       scheduled_repeat TEXT,
+       deadline_repeat TEXT
 );
 
 CREATE TABLE clock_entry(
@@ -87,6 +89,10 @@ INSERT INTO tag_type(type_id, description) VALUES(2, 'user');
 -- Set up system tags
 INSERT INTO tag(type_id, description) VALUES(0, 'inbox');
 INSERT INTO tag(type_id, description) VALUES(0, 'starred');
+
+-- Set up system event types
+INSERT INTO event_types(event_type_id, description) VALUES(0, 'calendar-event');
+INSERT INTO event_types(event_type_id, description) VALUES(1, 'logging-event');
 
 -- Default TODO states
 INSERT INTO states(state_id, description, next_state_id, colour) VALUES(0, 'DONE', NULL, 'green');
