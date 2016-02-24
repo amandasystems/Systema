@@ -1,10 +1,12 @@
-'use strict';
+import CommentBox from '../views/commentbox.jsx';
 
 var sqlite3 = require('sqlite3').verbose();
 //var jQuery = require('jquery');
 //var bootstrap = require('bootstrap');
 var React = require('react');
 var ReactDOM = require('react-dom');
+require('babel-register');
+
 const ipcRenderer = require('electron').ipcRenderer;
 const remote = require('electron').remote;
 const DB_FILE = remote.getGlobal('DB_FILE');
@@ -25,16 +27,11 @@ var db = new sqlite3.Database(DB_FILE, function() {
  });
 });
 
-var CommentBox = React.createClass({
-  render: function() {
-      return React.createElement("div", {className: "commentBox"},
-                                 "Hello World! I am a CommentBox.");
-  }
-});
-
-ReactDOM.render(
-  React.createElement(CommentBox, null),
-  document.getElementById('container')
-);
+window.onload = function() {
+  ReactDOM.render(
+    React.createElement(CommentBox, null),
+    document.getElementById('container')
+  );
+}
 
 db.close();
