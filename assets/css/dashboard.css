@@ -103,3 +103,12 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.todo-keyword {
+  color:coral;
+  font-weight:bold;
+}
+
+.listing-tag {
+  font-family: monospace;
+}
