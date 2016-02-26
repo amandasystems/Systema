@@ -89,6 +89,7 @@ INSERT INTO tag_type(type_id, description) VALUES(2, 'user');
 -- Set up system tags
 INSERT INTO tag(type_id, description) VALUES(0, 'inbox');
 INSERT INTO tag(type_id, description) VALUES(0, 'starred');
+INSERT INTO tag(type_id, description) VALUES(0, 'today');
 
 -- Set up system event types
 INSERT INTO event_types(event_type_id, description) VALUES(0, 'calendar-event');
