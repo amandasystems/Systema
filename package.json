@@ -1,18 +1,18 @@
 {
-  "name"    : "systema",
-  "productName" : "Systema",
-  "license" : "GPL-3.0+",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/albins/systema.git"
+  "name": "systema",
+  "productName": "Systema",
+  "license": "GPL-3.0+",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/albins/systema.git"
   },
-  "version" : "0.1.0",
-  "main"    : "bootstrap.js",
+  "version": "0.1.0",
+  "main": "bootstrap.js",
   "scripts": {
-    "start": "electron main.js",
-    "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=$npm_package_electronVersion"
+    "start": "./node_modules/.bin/electron main.js",
+    "build": "./node_modules/.bin/electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=$npm_package_electronVersion"
   },
-  "dependencies" : {
+  "dependencies": {
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "babel-register": "^6.3.13",
@@ -21,10 +21,12 @@
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.4.0",
     "react": "^0.14.2",
-    "react-dom" : "^0.14.2"
+    "react-dom": "^0.14.2"
   },
   "devDependencies": {
     "electron-packager": "^5.2.1",
-    "electron-prebuilt": "^0.36.7"
+    "electron-prebuilt": "^0.36.9",
+    "electron-rebuild": "^1.1.3",
+    "node-gyp": "^3.3.0"
   }
 }
