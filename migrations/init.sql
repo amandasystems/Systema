@@ -92,8 +92,9 @@ INSERT INTO tag(type_id, description) VALUES(0, 'starred');
 INSERT INTO tag(type_id, description) VALUES(0, 'today');
 
 -- Set up system event types
-INSERT INTO event_types(event_type_id, description) VALUES(0, 'calendar-event');
-INSERT INTO event_types(event_type_id, description) VALUES(1, 'logging-event');
+INSERT INTO event_types(event_type_id, description) VALUES(0, 'calendar-entry');
+INSERT INTO event_types(event_type_id, description) VALUES(1, 'user-logging-event');
+INSERT INTO event_types(event_type_id, description) VALUES(2, 'system-logging-event');
 
 -- Default TODO states
 INSERT INTO states(state_id, description, next_state_id, colour) VALUES(0, 'DONE', NULL, 'green');
