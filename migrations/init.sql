@@ -19,8 +19,7 @@ CREATE TABLE tag (
 CREATE TABLE states(
        state_id INTEGER PRIMARY KEY,
        next_state_id INTEGER,
-       description TEXT NOT NULL,
-       colour TEXT
+       description TEXT NOT NULL
 );
 
 CREATE TABLE note(
@@ -97,10 +96,10 @@ INSERT INTO event_types(event_type_id, description) VALUES(1, 'user-logging-even
 INSERT INTO event_types(event_type_id, description) VALUES(2, 'system-logging-event');
 
 -- Default TODO states
-INSERT INTO states(state_id, description, next_state_id, colour) VALUES(0, 'DONE', NULL, 'green');
-INSERT INTO states(state_id, description, next_state_id, colour) VALUES(1, 'TODO', 0, 'red');
-INSERT INTO states(state_id, description, next_state_id, colour) VALUES(2, 'WAITING', 0, 'blue');
-INSERT INTO states(state_id, description, next_state_id, colour) VALUES(3, 'CANCELLED', NULL, 'pink');
+INSERT INTO states(state_id, description, next_state_id, colour) VALUES(0, 'DONE', NULL);
+INSERT INTO states(state_id, description, next_state_id, colour) VALUES(1, 'TODO', 0);
+INSERT INTO states(state_id, description, next_state_id, colour) VALUES(2, 'WAITING', 0);
+INSERT INTO states(state_id, description, next_state_id, colour) VALUES(3, 'CANCELLED', NULL);
 
 
 END TRANSACTION;
