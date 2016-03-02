@@ -55,7 +55,43 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Dashboard</h1>
+          <div class="row">
+            <button class="button btn btn-default" type="button">ADD NEW</button>
 
+            <h2 class="sub-header">Today's tasks</h2>
+            <div class="progress">
+              <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                40% done with today's tasks!
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>State</th>
+                    <th></th>
+                    <th><i class="fa fa-clock-o"></i></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td><button type="button" class="btn btn-default todo-keyword btn-xs">TODO</button></td>
+                    <td>Finish up the design for Systema <span class="badge"><i class="fa fa-clock-o"> 0:30</span></td>
+                    <td>2:00</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td><button type="button" class="btn btn-default todo-keyword btn-xs">TODO</button></td>
+                    <td>Design a pretty logo (see also <a href="#">#1</a>) <span class="listing-tag">@home @computer</span></td>
+                    <td>0:15</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <h2 class="sub-heading">Projects</h2>
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
@@ -77,43 +113,6 @@
               <h4>Label</h4>
               <span class="text-muted">Something else</span>
             </div>
-          </div>
-
-
-          <button class="button btn btn-default" type="button">ADD NEW</button>
-
-
-          <h2 class="sub-header">Today's tasks</h2>
-          <div class="progress">
-            <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-              40% done with today's tasks!
-            </div>
-          </div>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>State</th>
-                  <th></th>
-                  <th><i class="fa fa-clock-o"></i></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td><button type="button" class="btn btn-default todo-keyword btn-xs">TODO</button></td>
-                  <td>Finish up the design for Systema <span class="badge"><i class="fa fa-clock-o"> 0:30</span></td>
-                  <td>2:00</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td><button type="button" class="btn btn-default todo-keyword btn-xs">TODO</button></td>
-                  <td>Design a pretty logo (see also <a href="#">#1</a>) <span class="listing-tag">@home @computer</span></td>
-                  <td>0:15</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
       </div>

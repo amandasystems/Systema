@@ -14,7 +14,6 @@ body {
 
 .sub-header {
   padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
 }
 
 /*
@@ -23,6 +22,7 @@ body {
  */
 .navbar-fixed-top {
     border: 0;
+    background-color:white;
 }
 
 /*
