@@ -27,6 +27,12 @@ export default class TodoButton extends React.Component {
 
 export default class TodoDescriptionRow extends React.Component {
 
+    formatTags() {
+        var atTags = this.props.task.tags.map(
+            function concatAt(tag) {return "@" + tag;});
+        return atTags.join(" ");
+    }
+
     render() {
 
         var clockElement = null;
@@ -38,11 +44,17 @@ export default class TodoDescriptionRow extends React.Component {
                 </span>);
         }
 
+        var tagsElement = null;
+        if(this.props.task.tags.length > 0) {
+            tagsElement = (<span className="listing-tag">{this.formatTags()}</span>);
+        }
+
         return(
             <td>
             {this.props.task.description}
             &nbsp;
             {clockElement}
+            {tagsElement}
             </td>
             );
     }

@@ -29,8 +29,8 @@ var db = new sqlite3.Database(DB_FILE, function() {
 
 var tasks = [
   {id: 1, todo: "TODO", is_done: false, description: "A todo", tags: ["label1", "label2"], effort: 105},
-  {id: 2, todo: "TODO", is_done: false, description: "Another todo", tags: ["label1", "label2"], effort: 90},
-  {id: 3, todo: "TODO", is_done: false, description: "Do the dishes", tags: ["label1", "label2"], effort: 1232}
+  {id: 2, todo: "TODO", is_done: false, description: "Another todo", tags: ["bork", "baz"], effort: 90},
+  {id: 3, todo: "TODO", is_done: false, description: "Do the dishes", tags: ["flurk", "flerk"], effort: 1232}
 ];
 
 window.onload = function() {
