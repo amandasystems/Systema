@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <title>Systema</title>
+    <script>
+      require('babel-register');
+      require('./scripts/app');</script>
+  </head>
+  <body>
+    <nav class="navbar navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">{<i class="fa fa-cubes"></i> Systema.} </i></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><i class="fa fa-cog fa-lg" alt="Settings"></i></a></li>
+            <li><a href="#"><i class="fa fa-question-circle fa-lg" alt="Help"></i></a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#"><a href="#"><i class="fa fa-dashboard"></i> Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="#"><i class="fa fa-inbox fa-align-left fa-fw"></i> Inbox <span class="badge">17</span></a></li>
+            <li><a href="#"><i class="fa fa-crosshairs fa-align-left fa-fw"></i> Projects</a></li>
+            <li><a href="#"><i class="fa fa-pencil-square-o fa-align-left fa-fw"></i> Notes</a></li>
+            <li><a href="#"><i class="fa fa-archive fa-align-left fa-fw"></i> Archive</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="#"><i class="fa fa-tags"></i> Tags</a></li>
+            <li><a href="#"><i class="fa fa-list"></i> Lists</a>
+              <ul><li><a href="#">List a</a></li></ul>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Dashboard</h1>
+          <button class="button btn btn-default" type="button">ADD TASK</button>
+          <div class="row">
+            <h2 class="sub-header">Today's tasks</h2>
+            <div class="progress">
+              <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                40% done with today's tasks!
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>State</th>
+                    <th></th>
+                    <th><i class="fa fa-clock-o"></i></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td><button type="button" class="btn btn-default todo-keyword btn-xs">TODO</button></td>
+                    <td>Finish up the design for Systema <span class="badge"><i class="fa fa-clock-o"> 0:30</span></td>
+                    <td>2:00</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td><button type="button" class="btn btn-default todo-keyword btn-xs">TODO</button></td>
+                    <td>Design a pretty logo (see also <a href="#">#1</a>) <span class="listing-tag">@home @computer</span></td>
+                    <td>0:15</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <h2 class="sub-heading">Projects </h2>
+            <div class="row placeholders">
+              <div class="col-xs-6 col-sm-3 placeholder">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                  <h4>Project A</h4>
+                  <span class="text-muted">Something else</span>
+              </div>
+              <div class="col-xs-6 col-sm-3 placeholder">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                <h4>Project B</h4>
+                <span class="text-muted">Something else</span>
+              </div>
+              <div class="col-xs-6 col-sm-3 placeholder">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                <h4>Project C</h4>
+                <span class="text-muted">Something else</span>
+              </div>
+              <div class="col-xs-6 col-sm-3 placeholder">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                <h4>Project D</h4>
+                <span class="text-muted">Something else</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <h2 class="sub-heading">All tasks</h2>
+            <p>You currently have an estimated 2 days, 3 hours and 45 minutes worth of tasks.</p>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>State</th>
+                    <th></th>
+                    <th><i class="fa fa-clock-o"></i></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2</td>
+                    <td><button type="button" class="btn btn-default todo-keyword btn-xs">TODO</button></td>
+                    <td>Design a pretty logo (see also <a href="#">#1</a>) <span class="listing-tag">@home @computer</span></td>
+                    <td>0:15</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td><button type="button" class="btn btn-default todo-keyword btn-xs">TODO</button></td>
+                    <td>!?!??!?! PROFIT</td>
+                    <td>0:15</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

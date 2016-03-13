@@ -21,7 +21,8 @@
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.4.0",
     "react": "^0.14.2",
-    "react-dom": "^0.14.2"
+    "react-dom": "^0.14.2",
+    "pretty-time": "^0.2.0"
   },
   "devDependencies": {
     "electron-packager": "^5.2.1",
