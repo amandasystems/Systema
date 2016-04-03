@@ -97,10 +97,10 @@ INSERT INTO event_types(event_type_id, description) VALUES(1, 'user-logging-even
 INSERT INTO event_types(event_type_id, description) VALUES(2, 'system-logging-event');
 
 -- Default TODO states
-INSERT INTO states(state_id, description, next_state_id, colour) VALUES(0, 'DONE', NULL);
-INSERT INTO states(state_id, description, next_state_id, colour) VALUES(1, 'TODO', 0);
-INSERT INTO states(state_id, description, next_state_id, colour) VALUES(2, 'WAITING', 0);
-INSERT INTO states(state_id, description, next_state_id, colour) VALUES(3, 'CANCELLED', NULL);
+INSERT INTO states(state_id, description, next_state_id) VALUES(0, 'DONE', NULL);
+INSERT INTO states(state_id, description, next_state_id) VALUES(1, 'TODO', 0);
+INSERT INTO states(state_id, description, next_state_id) VALUES(2, 'WAITING', 0);
+INSERT INTO states(state_id, description, next_state_id) VALUES(3, 'CANCELLED', NULL);
 
 
 END TRANSACTION;

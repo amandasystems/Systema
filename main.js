@@ -143,6 +143,7 @@ app.on('ready', function() {
                                   title: 'Systema',
                                   'auto-hide-menu-bar': true});
 
+  console.log("Using database " + DB_FILE);
   /* FIXME should be a file, should be callback from whatever ensures
    the config dir exists.*/
   db = new sqlite3.Database(DB_FILE,
