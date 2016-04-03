@@ -13,7 +13,7 @@ function formatLongMinutes(minutes) {
     return pretty([60 * minutes, 0], 'm');
 }
 
-export default class TodoButton extends React.Component {
+class TodoButton extends React.Component {
     render() {
         return(
             <button
@@ -25,7 +25,7 @@ export default class TodoButton extends React.Component {
     }
 }
 
-export default class TodoDescriptionRow extends React.Component {
+class TodoDescriptionRow extends React.Component {
 
     formatTags() {
         var atTags = this.props.task.tags.map(
@@ -61,7 +61,7 @@ export default class TodoDescriptionRow extends React.Component {
 
 }
 
-export default class TodoListItem extends React.Component {
+class TodoListItem extends React.Component {
     render() {
         return (
             <tr>
@@ -78,8 +78,7 @@ export default class TodoListItem extends React.Component {
     }
 }
 
-
-export default class GlobalTodoList extends React.Component {
+export class GlobalTodoList extends React.Component {
 
     sumMinutes() {
         return this.props.tasks.reduce(function(previousValue, task, _currentIndex, _array) {
@@ -115,4 +114,35 @@ export default class GlobalTodoList extends React.Component {
       );
 
   }
+}
+
+export class TopNavbar extends React.Component {
+
+    render() {
+        return (
+            <nav className="navbar navbar-fixed-top">
+            <div className="container-fluid">
+            <div className="navbar-header">
+            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span className="sr-only">Toggle navigation</span>
+            <span className="icon-bar"></span>
+            <span className="icon-bar"></span>
+            <span className="icon-bar"></span>
+            </button>
+            <a className="navbar-brand" href="#"><i className="fa fa-cubes"></i> Systema.</a>
+            </div>
+            <div id="navbar" className="navbar-collapse collapse">
+            <ul className="nav navbar-nav navbar-right">
+            <li><a href="#"><i className="fa fa-cog fa-lg" alt="Settings"></i></a></li>
+            <li><a href="#"><i className="fa fa-question-circle fa-lg" alt="Help"></i></a></li>
+            </ul>
+            <form className="navbar-form navbar-right">
+            <input type="text" className="form-control" placeholder="Search..."/>
+            </form>
+            </div>
+            </div>
+            </nav>
+        );
+    }
+
 }
