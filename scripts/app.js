@@ -32,7 +32,8 @@ var tasks = [
   {id: 1, todo: "TODO", is_done: false, description: "Finish up the design for Systema", tags: ["design"], effort: 105},
   {id: 2, todo: "TODO", is_done: false, description: "Design a pretty logo (see also #1)", tags: ["home", "computer"], effort: 90},
   {id: 3, todo: "TODO", is_done: false, description: "Do the dishes", tags: ["housework", "brain-free"], effort: 1232},
-  {id: 6, todo: "DONE", is_done: true, description: "Clean the bathroom", tags: ["housework", "brain-free"], effort: 20}
+  {id: 6, todo: "DONE", is_done: true, description: "Clean the bathroom", tags: ["housework", "brain-free"], effort: 20},
+  {id: 7, todo: "WAITING", is_done: false, description: "Reply from someone", tags: ["delegated"], effort: 0}
 ];
 
 var todaysTasks = tasks;

@@ -3,6 +3,9 @@
 import React from 'react';
 import pretty from 'pretty-time';
 
+const REGULAR_TODO = "TODO";
+const REGULAR_DONE = "DONE";
+
 function formatMinutes(minutes, fmt) {
     // format is [seconds, nanoseconds]
     return pretty([60 * minutes, 0], fmt);
@@ -24,11 +27,21 @@ function isDone(task) {
 
 class TodoButton extends React.Component {
     render() {
+
+        var todoMarker = this.props.todoState;
+
+        if (this.props.todoState == REGULAR_TODO) {
+            todoMarker = <i className="fa fa-circle-o fa-lg"/>;
+        } else if (this.props.todoState == REGULAR_DONE) {
+
+            todoMarker = <i className="fa fa-check-circle-o fa-lg"/>;
+        }
+
         return(
             <button
             type="button"
             className="btn btn-default todo-keyword btn-xs">
-            {this.props.todoState}
+            {todoMarker}
                 </button>
         );
     }
@@ -248,10 +261,17 @@ class ProjectItem extends React.Component {
 
 
     render() {
+
+        var stalledIndicator = null;
+
+        if(this.props.project.is_stalled) {
+            stalledIndicator = (<span className="badge badge-warning">stalled!</span>);
+        }
+
         return (
             <div className="col-xs-6 col-sm-3 placeholder">
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" className="img-responsive" alt="Generic placeholder thumbnail"/>
-            <h4>#{this.props.project.id}: {this.props.project.description}</h4>
+            <h4>#{this.props.project.id}: {this.props.project.description} {stalledIndicator}</h4>
             <span className="text-muted">{this.props.project.comment}</span>
             </div>
         );
