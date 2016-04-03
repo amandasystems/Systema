@@ -184,12 +184,33 @@ export class SideBar extends React.Component {
 
 }
 
+class TodayProgressBar extends React.Component {
+
+    render() {
+        return (
+            <div className="progress">
+            <div className="progress-bar progress-bar-success progress-bar-striped"
+            role="progressbar" aria-valuenow={this.props.progress}
+            aria-valuemin="0" aria-valuemax="100"
+            style={{width: this.props.progress + "%"}}>
+            {this.props.progress}% done with todays tasks!
+              </div>
+            </div>
+        );
+    }
+
+}
+
+
 export class TodaysTasksList extends React.Component {
 
-    // Fixme: actually calculate correct percentage!
-    // fixme: think about wether it's percentage of TASKS or EST. MINUTES.
+    doneTasks() {
+        return this.props.tasks.filter(isDone);
+    }
+
     getProgressPercentage() {
-        return 40;
+        var numDoneTasks = this.doneTasks().length;
+        return (numDoneTasks / this.props.tasks.length) * 100;
     };
 
     render() {
@@ -202,14 +223,8 @@ export class TodaysTasksList extends React.Component {
 
         return (
         <div className="row">
-            <h2 className="sub-header">Today's tasks</h2>
-            <div className="progress">
-              <div className="progress-bar progress-bar-success progress-bar-striped"
-role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
-style={{width: "40%"}}>
-                40% done with today's tasks!
-              </div>
-            </div>
+            <h2 className="sub-heading">Today's tasks</h2>
+            <TodayProgressBar progress={this.getProgressPercentage()}/>
             <div className="table-responsive">
               <table className="table table-striped">
                 <thead>
@@ -220,20 +235,7 @@ style={{width: "40%"}}>
                     <th><i className="fa fa-clock-o"></i></th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td><button type="button" className="btn btn-default todo-keyword btn-xs">TODO</button></td>
-                    <td>Finish up the design for Systema <span className="badge"><i className="fa fa-clock-o"/> 0:30</span></td>
-                    <td>2:00</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td><button type="button" className="btn btn-default todo-keyword btn-xs">TODO</button></td>
-                    <td>Design a pretty logo (see also <a href="#">#1</a>) <span className="listing-tag">@home @computer</span></td>
-                    <td>0:15</td>
-                  </tr>
-                </tbody>
+                <tbody>{rows}</tbody>
               </table>
             </div>
           </div>
