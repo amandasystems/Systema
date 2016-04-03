@@ -13,8 +13,12 @@ function formatLongMinutes(minutes) {
     return pretty([60 * minutes, 0], 'm');
 }
 
-function isActive(task) {
+function isNotDone(task) {
     return !task.is_done;
+}
+
+function isDone(task) {
+    return task.is_done;
 }
 
 
@@ -86,7 +90,7 @@ class TodoListItem extends React.Component {
 export class GlobalTodoList extends React.Component {
 
     activeTasks() {
-        return this.props.tasks.filter(isActive);
+        return this.props.tasks.filter(isNotDone);
     }
 
     sumMinutes() {
@@ -181,7 +185,21 @@ export class SideBar extends React.Component {
 }
 
 export class TodaysTasksList extends React.Component {
+
+    // Fixme: actually calculate correct percentage!
+    // fixme: think about wether it's percentage of TASKS or EST. MINUTES.
+    getProgressPercentage() {
+        return 40;
+    };
+
     render() {
+
+        var rows = [];
+
+        this.props.tasks.forEach(function(task) {
+            rows.push(<TodoListItem task={task} key={task.id}/>);
+        }.bind(this));
+
         return (
         <div className="row">
             <h2 className="sub-header">Today's tasks</h2>
