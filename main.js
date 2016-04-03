@@ -74,6 +74,7 @@ function performMigration(version, dbCallback) {
 function chainMigrations(error) {
   if(error) {
     console.log("Error performing chained migration: " + error);
+    app.quit();
     return;
   }
 
