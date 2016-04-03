@@ -217,6 +217,32 @@ style={{width: "40%"}}>
 
 export class ProjectsList extends React.Component {
     render() {
-        return <p>Projects!</p>;
+        return (
+            <div class="row">
+            <h2 className="sub-heading">Projects </h2>
+            <div className="row placeholders">
+              <div className="col-xs-6 col-sm-3 placeholder">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" className="img-responsive" alt="Generic placeholder thumbnail"/>
+                  <h4>Project A</h4>
+                  <span className="text-muted">Something else</span>
+              </div>
+              <div className="col-xs-6 col-sm-3 placeholder">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" className="img-responsive" alt="Generic placeholder thumbnail"/>
+                <h4>Project B</h4>
+                <span className="text-muted">Something else</span>
+              </div>
+              <div className="col-xs-6 col-sm-3 placeholder">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" className="img-responsive" alt="Generic placeholder thumbnail"/>
+                <h4>Project C</h4>
+                <span className="text-muted">Something else</span>
+              </div>
+              <div className="col-xs-6 col-sm-3 placeholder">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" className="img-responsive" alt="Generic placeholder thumbnail"/>
+                <h4>Project D</h4>
+                <span className="text-muted">Something else</span>
+              </div>
+            </div>
+          </div>
+        );
     }
 }
