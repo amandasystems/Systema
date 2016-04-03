@@ -29,9 +29,9 @@ var db = new sqlite3.Database(DB_FILE, function() {
 });
 
 var tasks = [
-  {id: 1, todo: "TODO", is_done: false, description: "A todo", tags: ["label1", "label2"], effort: 105},
-  {id: 2, todo: "TODO", is_done: false, description: "Another todo", tags: ["bork", "baz"], effort: 90},
-  {id: 3, todo: "TODO", is_done: false, description: "Do the dishes", tags: ["flurk", "flerk"], effort: 1232}
+  {id: 1, todo: "TODO", is_done: false, description: "Finish up the design for Systema", tags: ["design"], effort: 105},
+  {id: 2, todo: "TODO", is_done: false, description: "Design a pretty logo (see also #1)", tags: ["home", "computer"], effort: 90},
+  {id: 3, todo: "TODO", is_done: false, description: "Do the dishes", tags: ["housework", "brain-free"], effort: 1232}
 ];
 
 window.onload = function() {
