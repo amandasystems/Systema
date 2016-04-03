@@ -173,7 +173,44 @@ export class SideBar extends React.Component {
 
 export class TodaysTasksList extends React.Component {
     render() {
-        return <p>Todays tasks!</p>;
+        return (
+        <div className="row">
+            <h2 className="sub-header">Today's tasks</h2>
+            <div className="progress">
+              <div className="progress-bar progress-bar-success progress-bar-striped"
+role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+style={{width: "40%"}}>
+                40% done with today's tasks!
+              </div>
+            </div>
+            <div className="table-responsive">
+              <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>State</th>
+                    <th></th>
+                    <th><i className="fa fa-clock-o"></i></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td><button type="button" className="btn btn-default todo-keyword btn-xs">TODO</button></td>
+                    <td>Finish up the design for Systema <span className="badge"><i className="fa fa-clock-o"/> 0:30</span></td>
+                    <td>2:00</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td><button type="button" className="btn btn-default todo-keyword btn-xs">TODO</button></td>
+                    <td>Design a pretty logo (see also <a href="#">#1</a>) <span className="listing-tag">@home @computer</span></td>
+                    <td>0:15</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+    );
     }
 
 }
