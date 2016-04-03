@@ -13,6 +13,11 @@ function formatLongMinutes(minutes) {
     return pretty([60 * minutes, 0], 'm');
 }
 
+function isActive(task) {
+    return !task.is_done;
+}
+
+
 class TodoButton extends React.Component {
     render() {
         return(
@@ -80,8 +85,12 @@ class TodoListItem extends React.Component {
 
 export class GlobalTodoList extends React.Component {
 
+    activeTasks() {
+        return this.props.tasks.filter(isActive);
+    }
+
     sumMinutes() {
-        return this.props.tasks.reduce(function(previousValue, task, _currentIndex, _array) {
+        return this.activeTasks().reduce(function(previousValue, task, _currentIndex, _array) {
             return previousValue + task.effort;
         }, 0);
     }
@@ -89,7 +98,7 @@ export class GlobalTodoList extends React.Component {
     render() {
       var rows = [];
 
-      this.props.tasks.forEach(function(task) {
+      this.activeTasks().forEach(function(task) {
           rows.push(<TodoListItem task={task} key={task.id}/>);
       }.bind(this));
 
