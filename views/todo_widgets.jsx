@@ -223,7 +223,7 @@ export class TodaysTasksList extends React.Component {
 
         return (
         <div className="row">
-            <h2 className="sub-heading">Today's tasks</h2>
+            <h2 className="sub-heading">Todays tasks</h2>
             <TodayProgressBar progress={this.getProgressPercentage()}/>
             <div className="table-responsive">
               <table className="table table-striped">
@@ -244,34 +244,38 @@ export class TodaysTasksList extends React.Component {
 
 }
 
+class ProjectItem extends React.Component {
+
+
+    render() {
+        return (
+            <div className="col-xs-6 col-sm-3 placeholder">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" className="img-responsive" alt="Generic placeholder thumbnail"/>
+            <h4>#{this.props.project.id}: {this.props.project.description}</h4>
+            <span className="text-muted">{this.props.project.comment}</span>
+            </div>
+        );
+
+        return <p>Look at me! Im an item!</p>;
+    }
+}
+
 export class ProjectsList extends React.Component {
     render() {
+
+        var items = [];
+
+        this.props.projects.forEach(function(project) {
+            items.push(<ProjectItem project={project} key={project.id}/>);
+        }.bind(this));
+
         return (
             <div class="row">
             <h2 className="sub-heading">Projects </h2>
             <div className="row placeholders">
-              <div className="col-xs-6 col-sm-3 placeholder">
-                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" className="img-responsive" alt="Generic placeholder thumbnail"/>
-                  <h4>Project A</h4>
-                  <span className="text-muted">Something else</span>
-              </div>
-              <div className="col-xs-6 col-sm-3 placeholder">
-                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" className="img-responsive" alt="Generic placeholder thumbnail"/>
-                <h4>Project B</h4>
-                <span className="text-muted">Something else</span>
-              </div>
-              <div className="col-xs-6 col-sm-3 placeholder">
-                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" className="img-responsive" alt="Generic placeholder thumbnail"/>
-                <h4>Project C</h4>
-                <span className="text-muted">Something else</span>
-              </div>
-              <div className="col-xs-6 col-sm-3 placeholder">
-                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" className="img-responsive" alt="Generic placeholder thumbnail"/>
-                <h4>Project D</h4>
-                <span className="text-muted">Something else</span>
-              </div>
+            {items}
             </div>
-          </div>
+            </div>
         );
     }
 }
