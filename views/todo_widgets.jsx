@@ -290,7 +290,7 @@ export class ProjectsList extends React.Component {
         }.bind(this));
 
         return (
-            <div class="row">
+            <div className="row">
             <h2 className="sub-heading">Projects </h2>
             <div className="row placeholders">
             {items}
