@@ -34,6 +34,17 @@ var tasks = [
   {id: 3, todo: "TODO", is_done: false, description: "Do the dishes", tags: ["housework", "brain-free"], effort: 1232}
 ];
 
+var todaysTasks = tasks;
+
+var projects = [{id: 4, is_stalled: false,
+                 description: "Project Z",
+                 comment: "A slightly longer project example.",
+                 tags : ["project-tag"]},
+               {id: 5, is_stalled: true,
+                 description: "A stalled project",
+                 comment: "This project is unfortunately stalled. :(",
+                 tags : ["sourdoughs"]}];
+
 window.onload = function() {
   ReactDOM.render(
       <div>
@@ -44,8 +55,8 @@ window.onload = function() {
       <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
       <h1 className="page-header">Dashboard</h1>
       <button className="button btn btn-default" type="button">ADD TASK</button>
-      <TodaysTasksList tasks={tasks}/>
-      <ProjectsList/>
+      <TodaysTasksList tasks={todaysTasks}/>
+      <ProjectsList projects={projects}/>
       <GlobalTodoList tasks={tasks}/>
       </div>
       </div>

@@ -40,7 +40,8 @@ CREATE TABLE note_parent(
 
 CREATE TABLE project(
        note_id INTEGER PRIMARY KEY REFERENCES note(note_id) ON DELETE CASCADE,
-       type INTEGER
+       type INTEGER,
+       comment TEXT
 );
 
 CREATE TABLE note_tag(
