@@ -170,3 +170,16 @@ export class SideBar extends React.Component {
     }
 
 }
+
+export class TodaysTasksList extends React.Component {
+    render() {
+        return <p>Todays tasks!</p>;
+    }
+
+}
+
+export class ProjectsList extends React.Component {
+    render() {
+        return <p>Projects!</p>;
+    }
+}

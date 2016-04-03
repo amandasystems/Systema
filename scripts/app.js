@@ -1,4 +1,5 @@
-import {GlobalTodoList, TopNavbar, SideBar} from '../views/todo_widgets.jsx';
+import {GlobalTodoList, TopNavbar, SideBar, TodaysTasksList,
+       ProjectsList} from '../views/todo_widgets.jsx';
 
 var sqlite3 = require('sqlite3').verbose();
 //var jQuery = require('jquery');
@@ -38,9 +39,15 @@ window.onload = function() {
       <div>
       <TopNavbar/>
       <div className="container-fluid">
-      <div class="row">
+      <div className="row">
       <SideBar/>
+      <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <h1 className="page-header">Dashboard</h1>
+      <button className="button btn btn-default" type="button">ADD TASK</button>
+      <TodaysTasksList tasks={tasks}/>
+      <ProjectsList/>
       <GlobalTodoList tasks={tasks}/>
+      </div>
       </div>
       </div>
       </div>,
