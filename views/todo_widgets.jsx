@@ -146,3 +146,27 @@ export class TopNavbar extends React.Component {
     }
 
 }
+
+export class SideBar extends React.Component {
+
+    render() {
+        return(
+            <div className="col-sm-3 col-md-2 sidebar">
+            <ul className="nav nav-sidebar">
+            <li className="active"><a href="#"><i className="fa fa-dashboard"></i> Overview <span className="sr-only">(current)</span></a></li>
+            <li><a href="#"><i className="fa fa-inbox fa-align-left fa-fw"></i> Inbox <span className="badge">17</span></a></li>
+            <li><a href="#"><i className="fa fa-crosshairs fa-align-left fa-fw"></i> Projects</a></li>
+            <li><a href="#"><i className="fa fa-pencil-square-o fa-align-left fa-fw"></i> Notes</a></li>
+            <li><a href="#"><i className="fa fa-archive fa-align-left fa-fw"></i> Archive</a></li>
+          </ul>
+          <ul className="nav nav-sidebar">
+            <li><a href="#"><i className="fa fa-tags"></i> Tags</a></li>
+            <li><a href="#"><i className="fa fa-list"></i> Lists</a>
+              <ul><li><a href="#">List a</a></li></ul>
+            </li>
+          </ul>
+        </div>
+        );
+    }
+
+}

@@ -1,4 +1,4 @@
-import {GlobalTodoList, TopNavbar} from '../views/todo_widgets.jsx';
+import {GlobalTodoList, TopNavbar, SideBar} from '../views/todo_widgets.jsx';
 
 var sqlite3 = require('sqlite3').verbose();
 //var jQuery = require('jquery');
@@ -37,7 +37,12 @@ window.onload = function() {
   ReactDOM.render(
       <div>
       <TopNavbar/>
+      <div className="container-fluid">
+      <div class="row">
+      <SideBar/>
       <GlobalTodoList tasks={tasks}/>
+      </div>
+      </div>
       </div>,
     document.getElementById('container')
   );
