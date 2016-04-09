@@ -26,6 +26,17 @@ function isDone(task) {
 
 
 class TodoButton extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(e) {
+        e.preventDefault();
+        this.props.onClick();
+    }
+
     render() {
 
         var todoMarker = this.props.todoState;
@@ -40,7 +51,8 @@ class TodoButton extends React.Component {
         return(
             <button
             type="button"
-            className="btn btn-default todo-keyword btn-xs">
+            className="btn btn-default todo-keyword btn-xs"
+            onClick={this.handleClick}>
             {todoMarker}
                 </button>
         );
@@ -84,12 +96,22 @@ class TodoDescriptionRow extends React.Component {
 }
 
 class TodoListItem extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.handleTodoClick = this.handleTodoClick.bind(this);
+    }
+
+    handleTodoClick() {
+        this.props.onTodoChange(this.props.task.id, this.props.task.todo);
+    }
+
     render() {
         return (
             <tr>
             <td>{this.props.task.id}</td>
             <td>
-            <TodoButton todoState={this.props.task.todo}/>
+            <TodoButton todoState={this.props.task.todo} onClick = {this.handleTodoClick}/>
             </td>
             <TodoDescriptionRow task={this.props.task}
                                 clockedIn={false}
@@ -102,12 +124,48 @@ class TodoListItem extends React.Component {
 
 export class GlobalTodoList extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            point : null,
+            tasks : props.tasks,
+            uncompletedOnly : false,
+            markedIds : [] };
+
+        /* connect methods as described in
+          https://facebook.github.io/react/docs/reusable-components.html#no-autobinding
+          */
+        this.onTodoChange.bind(this);
+    }
+
+    onTodoChange(id, currentTodo) {
+        console.log("Changed TODO with id " + id + " and state " + currentTodo);
+
+        // FIXME: this transition needs to be fetched from the DB
+        // Also, it could possibly be disallowed (e.g. toggling a DONE state)
+
+        var newTasks = this.state.tasks.map(function nextState(task) {
+            if(task.id === id) {
+                var newTask = task;
+                newTask.todo = "DONE";
+                newTask.isDone = true;
+                return newTask;
+            }
+            else {
+                return task;
+            }});
+
+        this.setState({tasks : newTasks});
+
+    }
+
     activeTasks() {
-        return this.props.tasks.filter(isNotDone);
+        return this.state.tasks.filter(isNotDone);
     }
 
     sumMinutes() {
-        return this.activeTasks().reduce(function(previousValue, task, _currentIndex, _array) {
+        return this.activeTasks().reduce(function(previousValue, task) {
             return previousValue + task.effort;
         }, 0);
     }
@@ -116,7 +174,8 @@ export class GlobalTodoList extends React.Component {
       var rows = [];
 
       this.activeTasks().forEach(function(task) {
-          rows.push(<TodoListItem task={task} key={task.id}/>);
+          rows.push(<TodoListItem task={task} key={task.id}
+              onTodoChange={(id, todo) => {this.onTodoChange(id, todo)}} />);
       }.bind(this));
 
       return (
