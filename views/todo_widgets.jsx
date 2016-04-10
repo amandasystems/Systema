@@ -26,7 +26,7 @@ function isDone(task) {
 }
 
 function hasTag(task, tag) {
-    return task.tags.search(tag) !== -1;
+    return task.tags.indexOf(tag) !== -1;
 }
 
 
@@ -363,6 +363,11 @@ export class Dashboard extends React.Component {
 
     }
 
+    todaysTasks() {
+        return this.state.tasks.filter((task) =>
+        {return hasTag(task, TODAY_TAG)});
+    }
+
     activeTasks() {
         return this.state.tasks.filter(isNotDone);
     }
@@ -370,7 +375,7 @@ export class Dashboard extends React.Component {
     render() {
         return (
             <div>
-            <TodaysTasksList tasks={this.state.tasks}
+            <TodaysTasksList tasks={this.todaysTasks()}
             onTodoChange={(id, todo) => {this.onTodoChange(id, todo)}} />
             <ProjectsList projects={this.props.projects}/>
             <GlobalTodoList tasks={this.activeTasks()}
