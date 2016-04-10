@@ -19,6 +19,7 @@ CREATE TABLE tag (
 CREATE TABLE states(
        state_id INTEGER PRIMARY KEY,
        next_state_id INTEGER,
+       is_done BOOLEAN,
        description TEXT NOT NULL
 );
 
@@ -97,10 +98,10 @@ INSERT INTO event_types(event_type_id, description) VALUES(1, 'user-logging-even
 INSERT INTO event_types(event_type_id, description) VALUES(2, 'system-logging-event');
 
 -- Default TODO states
-INSERT INTO states(state_id, description, next_state_id) VALUES(0, 'DONE', NULL);
-INSERT INTO states(state_id, description, next_state_id) VALUES(1, 'TODO', 0);
-INSERT INTO states(state_id, description, next_state_id) VALUES(2, 'WAITING', 0);
-INSERT INTO states(state_id, description, next_state_id) VALUES(3, 'CANCELLED', NULL);
+INSERT INTO states(state_id, description, next_state_id, is_done) VALUES(0, 'DONE', 1, 0);
+INSERT INTO states(state_id, description, next_state_id, is_done) VALUES(1, 'TODO', 0, 1);
+INSERT INTO states(state_id, description, next_state_id, is_done) VALUES(2, 'WAITING', 0, 0);
+INSERT INTO states(state_id, description, next_state_id, is_done) VALUES(3, 'CANCELLED', NULL, 1);
 
 
 END TRANSACTION;
