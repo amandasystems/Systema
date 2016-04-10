@@ -73,11 +73,11 @@ class TodoButton extends React.Component {
 
         return(
             <button
-            type="button"
-            className="btn btn-default todo-keyword btn-xs"
-            onClick={this.handleClick}>
-            {todoMarker}
-                </button>
+                type="button"
+                className="btn btn-default todo-keyword btn-xs"
+                onClick={this.handleClick}>
+                {todoMarker}
+            </button>
         );
     }
 }
@@ -132,14 +132,15 @@ class TodoListItem extends React.Component {
     render() {
         return (
             <tr>
-            <td>{this.props.task.id}</td>
-            <td>
-            <TodoButton todoState={this.props.task.todo} onClick = {this.handleTodoClick}/>
-            </td>
-            <TodoDescriptionRow task={this.props.task}
-                                clockedIn={false}
-                                clockedTime={43} />
-            <td>{formatMinutes(this.props.task.effort, 'm')}</td>
+                <td>{this.props.task.id}</td>
+                <td>
+                    <TodoButton todoState={this.props.task.todo}
+                                onClick = {this.handleTodoClick}/>
+                </td>
+                <TodoDescriptionRow task={this.props.task}
+                                    clockedIn={false}
+                                    clockedTime={43} />
+                <td>{formatMinutes(this.props.task.effort, 'm')}</td>
             </tr>
         );
     }
@@ -163,28 +164,29 @@ class TodoList extends React.Component {
         if(this.props.tasks.length > 0) {
       return (
           <div>
-            <p>You currently have an estimated {formatLongMinutes(this.sumMinutes())} worth of unfinished tasks.</p>
-            <div className="table-responsive">
-              <table className="table table-stripped">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>State</th>
-                    <th></th>
-                    <th><i className="fa fa-clock-o"></i></th>
-                  </tr>
-                </thead>
-                <tbody>
-                   {
-                       this.props.tasks.map((task) => {
-                           return(<TodoListItem task={task} key={task.id}
-                               onTodoChange={(id, todo) => {this.onTodoChange(id, todo)}} />);
-                       })
+              <p>You currently have an estimated {formatLongMinutes(this.sumMinutes())} worth of unfinished tasks.</p>
+              <div className="table-responsive">
+                  <table className="table table-stripped">
+                      <thead>
+                          <tr>
+                              <th>#</th>
+                              <th>State</th>
+                              <th></th>
+                              <th><i className="fa fa-clock-o"></i></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {
+                              this.props.tasks.map((task) => {
+                                  return(<TodoListItem task={task} key={task.id}
+                                                       onTodoChange={(id, todo) =>
+                                                           {this.onTodoChange(id, todo)}} />);
+                              })
 
-                   }
-                </tbody>
-              </table>
-            </div>
+                          }
+                      </tbody>
+                  </table>
+              </div>
           </div>
       );
         } else {
@@ -199,26 +201,33 @@ export class TopNavbar extends React.Component {
     render() {
         return (
             <nav className="navbar navbar-fixed-top">
-            <div className="container-fluid">
-            <div className="navbar-header">
-            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span className="sr-only">Toggle navigation</span>
-            <span className="icon-bar"></span>
-            <span className="icon-bar"></span>
-            <span className="icon-bar"></span>
-            </button>
-            <a className="navbar-brand" href="#"><i className="fa fa-cubes"></i> Systema.</a>
-            </div>
-            <div id="navbar" className="navbar-collapse collapse">
-            <ul className="nav navbar-nav navbar-right">
-            <li><a href="#"><i className="fa fa-cog fa-lg" alt="Settings"></i></a></li>
-            <li><a href="#"><i className="fa fa-question-circle fa-lg" alt="Help"></i></a></li>
-            </ul>
-            <form className="navbar-form navbar-right">
-            <input type="text" className="form-control" placeholder="Search..."/>
-            </form>
-            </div>
-            </div>
+                <div className="container-fluid">
+                    <div className="navbar-header">
+                        <button type="button"
+                                className="navbar-toggle collapsed"
+                                data-toggle="collapse"
+                                data-target="#navbar"
+                                aria-expanded="false"
+                                aria-controls="navbar">
+                            <span className="sr-only">Toggle navigation</span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
+                        </button>
+                        <a className="navbar-brand" href="#">
+                            <i className="fa fa-cubes"></i> Systema.
+                        </a>
+                    </div>
+                    <div id="navbar" className="navbar-collapse collapse">
+                        <ul className="nav navbar-nav navbar-right">
+                            <li><a href="#"><i className="fa fa-cog fa-lg" alt="Settings"></i></a></li>
+                            <li><a href="#"><i className="fa fa-question-circle fa-lg" alt="Help"></i></a></li>
+                        </ul>
+                        <form className="navbar-form navbar-right">
+                            <input type="text" className="form-control" placeholder="Search..."/>
+                        </form>
+                    </div>
+                </div>
             </nav>
         );
     }
@@ -230,20 +239,34 @@ export class SideBar extends React.Component {
     render() {
         return(
             <div className="col-sm-3 col-md-2 sidebar">
-            <ul className="nav nav-sidebar">
-            <li className="active"><a href="#"><i className="fa fa-dashboard"></i> Overview <span className="sr-only">(current)</span></a></li>
-            <li><a href="#"><i className="fa fa-inbox fa-align-left fa-fw"></i> Inbox <span className="badge">17</span></a></li>
-            <li><a href="#"><i className="fa fa-crosshairs fa-align-left fa-fw"></i> Projects</a></li>
-            <li><a href="#"><i className="fa fa-pencil-square-o fa-align-left fa-fw"></i> Notes</a></li>
-            <li><a href="#"><i className="fa fa-archive fa-align-left fa-fw"></i> Archive</a></li>
-          </ul>
-          <ul className="nav nav-sidebar">
-            <li><a href="#"><i className="fa fa-tags"></i> Tags</a></li>
-            <li><a href="#"><i className="fa fa-list"></i> Lists</a>
-              <ul><li><a href="#">List a</a></li></ul>
-            </li>
-          </ul>
-        </div>
+                <ul className="nav nav-sidebar">
+                    <li className="active">
+                        <a href="#">
+                            <i className="fa fa-dashboard"/>
+                            Overview <span className="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i className="fa fa-inbox fa-align-left fa-fw"/>
+                            Inbox <span className="badge">17</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i className="fa fa-crosshairs fa-align-left fa-fw"/> Projects
+                        </a>
+                    </li>
+                    <li><a href="#"><i className="fa fa-pencil-square-o fa-align-left fa-fw"></i> Notes</a></li>
+                    <li><a href="#"><i className="fa fa-archive fa-align-left fa-fw"></i> Archive</a></li>
+                </ul>
+                <ul className="nav nav-sidebar">
+                    <li><a href="#"><i className="fa fa-tags"></i> Tags</a></li>
+                    <li><a href="#"><i className="fa fa-list"></i> Lists</a>
+                        <ul><li><a href="#">List a</a></li></ul>
+                    </li>
+                </ul>
+            </div>
         );
     }
 
@@ -254,12 +277,12 @@ class TodayProgressBar extends React.Component {
     render() {
         return (
             <div className="progress">
-            <div className="progress-bar progress-bar-success progress-bar-striped"
-            role="progressbar" aria-valuenow={this.props.progress}
-            aria-valuemin="0" aria-valuemax="100"
-            style={{width: this.props.progress + "%"}}>
-            {this.props.progress}% done with todays tasks!
-              </div>
+                <div className="progress-bar progress-bar-success progress-bar-striped"
+                     role="progressbar" aria-valuenow={this.props.progress}
+                     aria-valuemin="0" aria-valuemax="100"
+                     style={{width: this.props.progress + "%"}}>
+                    {this.props.progress}% done with todays tasks!
+                </div>
             </div>
         );
     }
@@ -285,8 +308,8 @@ export class TodaysTasksList extends React.Component {
             <h2 className="sub-heading">Todays tasks</h2>
             <TodayProgressBar progress={this.getProgressPercentage()}/>
             <TodoList tasks={this.props.tasks}
-            onTodoChange={(id, todo) => {this.props.onTodoChange(id, todo)}}/>
-          </div>
+                      onTodoChange={(id, todo) => {this.props.onTodoChange(id, todo)}}/>
+        </div>
     );
     }
 
@@ -305,9 +328,12 @@ class ProjectItem extends React.Component {
 
         return (
             <div className="col-xs-6 col-sm-3 placeholder">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" className="img-responsive" alt="Generic placeholder thumbnail"/>
-            <h4>#{this.props.project.id}: {this.props.project.description} {stalledIndicator}</h4>
-            <span className="text-muted">{this.props.project.comment}</span>
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                     width="200" height="200"
+                     className="img-responsive"
+                     alt="Generic placeholder thumbnail"/>
+                <h4>#{this.props.project.id}: {this.props.project.description} {stalledIndicator}</h4>
+                <span className="text-muted">{this.props.project.comment}</span>
             </div>
         );
 
@@ -326,10 +352,10 @@ class ProjectsList extends React.Component {
 
         return (
             <div className="row">
-            <h2 className="sub-heading">Projects </h2>
-            <div className="row placeholders">
-            {items}
-            </div>
+                <h2 className="sub-heading">Projects </h2>
+                <div className="row placeholders">
+                    {items}
+                </div>
             </div>
         );
     }
@@ -340,9 +366,9 @@ class GlobalTodoList extends React.Component {
     render() {
         return(
             <div className="row">
-            <h2>All tasks</h2>
-            <TodoList tasks={this.props.tasks}
-            onTodoChange={(id, todo) => {this.props.onTodoChange(id, todo)}}/>
+                <h2>All tasks</h2>
+                <TodoList tasks={this.props.tasks}
+                          onTodoChange={(id, todo) => {this.props.onTodoChange(id, todo)}}/>
             </div>
             );
     }
@@ -424,21 +450,21 @@ export class Dashboard extends React.Component {
     render() {
         return (
             <div>
-            <input
-	    className="new-todo"
-		placeholder="What needs to be done?"
-	        value={this.state.newTodo}
-		onKeyDown={(e) => {this.handleNewTodoKeyDown(e)}}
-	        onChange={(e) => {this.handleChange(e)}}
-	        autoFocus={true}
-	    />
-            <TodaysTasksList tasks={this.todaysTasks()}
-            onTodoChange={(id, todo) => {this.onTodoChange(id, todo)}} />
-            {
-                //<ProjectsList projects={this.props.model.allActiveProjects()}/>
-            }
-            <GlobalTodoList tasks={this.activeTasks()}
-            onTodoChange={(id, todo) => {this.onTodoChange(id, todo)}} />
+                <input
+	            className="new-todo"
+                    placeholder="What needs to be done?"
+	            value={this.state.newTodo}
+                    onKeyDown={(e) => {this.handleNewTodoKeyDown(e)}}
+	            onChange={(e) => {this.handleChange(e)}}
+	            autoFocus={true}
+	        />
+                <TodaysTasksList tasks={this.todaysTasks()}
+                                 onTodoChange={(id, todo) => {this.onTodoChange(id, todo)}} />
+                {
+                    //<ProjectsList projects={this.props.model.allActiveProjects()}/>
+                }
+                <GlobalTodoList tasks={this.activeTasks()}
+                                onTodoChange={(id, todo) => {this.onTodoChange(id, todo)}} />
             </div>
         );
     }
