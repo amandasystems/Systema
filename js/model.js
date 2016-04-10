@@ -37,8 +37,14 @@ export class TodoModel {
     var nts = this.tasks.map((task) => {
       if(task.id === taskId) {
         var newTask = task;
-        newTask.todo = "DONE";
-        newTask.is_done = true;
+
+        if(task.todo === "DONE") {
+          newTask.todo = "TODO";
+          newTask.is_done = false;
+        } else {
+          newTask.todo = "DONE";
+          newTask.is_done = true;
+        }
         return newTask;
       }
 
