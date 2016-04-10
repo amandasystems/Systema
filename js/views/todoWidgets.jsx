@@ -336,7 +336,7 @@ export class Dashboard extends React.Component {
 
         this.state = {
             point : null,
-            tasks : props.tasks,
+            tasks : props.model.allActiveTasks(),
             markedIds : [] };
 
         /* connect methods as described in
@@ -380,7 +380,7 @@ export class Dashboard extends React.Component {
             <div>
             <TodaysTasksList tasks={this.todaysTasks()}
             onTodoChange={(id, todo) => {this.onTodoChange(id, todo)}} />
-            <ProjectsList projects={this.props.projects}/>
+            <ProjectsList projects={this.props.model.allActiveProjects()}/>
             <GlobalTodoList tasks={this.activeTasks()}
             onTodoChange={(id, todo) => {this.onTodoChange(id, todo)}} />
             </div>

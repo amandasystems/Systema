@@ -1,4 +1,5 @@
 import {TopNavbar, SideBar, Dashboard} from '../js/views/todoWidgets.jsx';
+import {TodoModel} from '../js/model.js';
 
 var sqlite3 = require('sqlite3').verbose();
 //var jQuery = require('jquery');
@@ -19,32 +20,9 @@ window.onbeforeunload = function shutdownHandler() {
   if(db) db.close();
 };
 
-var db = new sqlite3.Database(DB_FILE, function() {
- db.serialize(function() {
-    db.each("SELECT * FROM states", function(err, row) {
-      console.log(row);
-    });
- });
-});
+var db = new sqlite3.Database(DB_FILE);
 
-var tasks = [
-  {id: 1, todo: "TODO", is_done: false, description: "Finish up the design for Systema", tags: ["design", "today"], effort: 105},
-  {id: 2, todo: "TODO", is_done: false, description: "Design a pretty logo (see also #1)", tags: ["home", "computer"], effort: 90},
-  {id: 3, todo: "TODO", is_done: false, description: "Do the dishes", tags: ["housework", "brain-free"], effort: 1232},
-  {id: 6, todo: "DONE", is_done: true, description: "Clean the bathroom", tags: ["housework", "brain-free", "today"], effort: 20},
-  {id: 7, todo: "WAITING", is_done: false, description: "Reply from someone", tags: ["delegated"], effort: 0}
-];
-
-var todaysTasks = tasks;
-
-var projects = [{id: 4, is_stalled: false,
-                 description: "Project Z",
-                 comment: "A slightly longer project example.",
-                 tags : ["project-tag"]},
-               {id: 5, is_stalled: true,
-                 description: "A stalled project",
-                 comment: "This project is unfortunately stalled. :(",
-                 tags : ["sourdoughs"]}];
+var model = new TodoModel(db);
 
 window.onload = function() {
   ReactDOM.render(
@@ -56,7 +34,7 @@ window.onload = function() {
       <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
       <h1 className="page-header">Dashboard</h1>
       <button className="button btn btn-default" type="button">ADD TASK</button>
-      <Dashboard tasks={tasks} projects={projects}/>
+      <Dashboard model={model}/>
       </div>
       </div>
       </div>
