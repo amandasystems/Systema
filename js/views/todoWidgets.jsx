@@ -7,6 +7,9 @@ const REGULAR_TODO = "TODO";
 const REGULAR_DONE = "DONE";
 const TODAY_TAG    = "today";
 
+const ENTER_KEY    = 13;
+const ESCAPE_KEY   = 27;
+
 function formatMinutes(minutes, fmt) {
     // format is [seconds, nanoseconds]
     return pretty([60 * minutes, 0], fmt);
@@ -29,6 +32,10 @@ function hasTag(task, tag) {
     return task.tags.indexOf(tag) !== -1;
 }
 
+
+function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
 class TodoButton extends React.Component {
 
@@ -336,6 +343,7 @@ export class Dashboard extends React.Component {
 
         this.state = {
             point : null,
+            newTodo : '',
             tasks : props.model.allActiveTasks(),
             markedIds : [] };
 
@@ -372,9 +380,44 @@ export class Dashboard extends React.Component {
         return this.state.tasks.filter(isNotDone);
     }
 
+    handleChange(event) {
+        this.setState({newTodo: event.target.value});
+    }
+
+    handleNewTodoKeyDown(event) {
+
+        if(event.keyCode === ESCAPE_KEY) {
+            console.log("FIXME: user pressed ESC, should focus nothing!");
+        }
+
+        if (event.keyCode !== ENTER_KEY) {
+	    return;
+	}
+
+
+	event.preventDefault();
+
+	var val = capitalizeFirstLetter(this.state.newTodo.trim());
+
+	if (val) {
+	    this.props.model.addTask(val, "TODO", [], 13);
+	    this.setState({newTodo: ''});
+	}
+
+    }
+
+
     render() {
         return (
             <div>
+            <input
+	    className="new-todo"
+		placeholder="What needs to be done?"
+	        value={this.state.newTodo}
+		onKeyDown={(e) => {this.handleNewTodoKeyDown(e)}}
+	        onChange={(e) => {this.handleChange(e)}}
+	        autoFocus={true}
+	    />
             <TodaysTasksList tasks={this.todaysTasks()}
             onTodoChange={(id, todo) => {this.onTodoChange(id, todo)}} />
             <ProjectsList projects={this.props.model.allActiveProjects()}/>

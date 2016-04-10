@@ -19,6 +19,8 @@ export class TodoModel {
                       description: "A stalled project",
                       comment: "This project is unfortunately stalled. :(",
                       tags : ["sourdoughs"]}];
+
+    this.nextId = 8;
   }
 
   getTaskById(taskId) {
@@ -26,8 +28,8 @@ export class TodoModel {
   }
 
   /**
-   * Advance the task with the given ID one step, and return the new
-   * task.
+   * Advance the task with the given ID one step. May wrap around.
+   * @return The same task with its new todo information.
    */
   nextTodoState(taskId) {
     console.log("Model: advancing TODO state of task with id " + taskId);
@@ -67,8 +69,22 @@ export class TodoModel {
 
   }
 
-  addTask() {
+  /**
+   * Add a new task to the collection.
+   * @return the new collection of active tasks with the new task added.
+   */
+  addTask(description, todo, tags, effort) {
+    var newTask = {id: this.nextId,
+                   description: description,
+                   tags: tags,
+                   is_done: false,
+                   todo: todo,
+                   effort: effort
+                  };
 
+    this.tasks.push(newTask);
+    this.nextId++;
+    return this.allActiveTasks();
   }
 
   updateTask() {
