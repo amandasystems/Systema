@@ -437,12 +437,13 @@ export class Dashboard extends React.Component {
 	var val = capitalizeFirstLetter(this.state.newTodo.trim());
 
 	if (val) {
-	    this.props.model.addTask(
-                descriptionFromString(val),
+	    var newTasks = this.props.model.addTask(
+              descriptionFromString(val),
                 "TODO",
                 tagsFromString(val),
                 13);
-	    this.setState({newTodo: ''});
+	    this.setState({newTodo: '',
+                           tasks:   newTasks});
 	}
 
     }
