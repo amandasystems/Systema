@@ -373,7 +373,7 @@ export class Dashboard extends React.Component {
             <TodaysTasksList tasks={this.state.tasks}
             onTodoChange={(id, todo) => {this.onTodoChange(id, todo)}} />
             <ProjectsList projects={this.props.projects}/>
-            <GlobalTodoList tasks={this.state.tasks}
+            <GlobalTodoList tasks={this.activeTasks()}
             onTodoChange={(id, todo) => {this.onTodoChange(id, todo)}} />
             </div>
         );
