@@ -142,12 +142,6 @@ class TodoList extends React.Component {
     }
 
     render() {
-      var rows = [];
-
-      this.props.tasks.forEach(function(task) {
-          rows.push(<TodoListItem task={task} key={task.id}
-              onTodoChange={(id, todo) => {this.onTodoChange(id, todo)}} />);
-      }.bind(this));
 
       return (
           <div>
@@ -162,7 +156,15 @@ class TodoList extends React.Component {
                     <th><i className="fa fa-clock-o"></i></th>
                   </tr>
                 </thead>
-                <tbody>{rows}</tbody>
+                <tbody>
+                   {
+                       this.props.tasks.map((task) => {
+                           return(<TodoListItem task={task} key={task.id}
+                               onTodoChange={(id, todo) => {this.onTodoChange(id, todo)}} />);
+                       })
+
+                   }
+                </tbody>
               </table>
             </div>
           </div>
