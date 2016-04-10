@@ -134,7 +134,9 @@ class TodoList extends React.Component {
     }
 
     sumMinutes() {
-        return this.props.tasks.reduce(function(previousValue, task) {
+        var unfinishedTasks = this.props.tasks.filter(isNotDone);
+
+        return unfinishedTasks.reduce(function(previousValue, task) {
             return previousValue + task.effort;
         }, 0);
     }
