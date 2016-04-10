@@ -21,29 +21,51 @@ export class TodoModel {
                       tags : ["sourdoughs"]}];
   }
 
+  getTaskById(taskId) {
+    return this.tasks.find((task) => {return task.id === taskId});
+  }
+
   /**
    * Advance the task with the given ID one step, and return the new
    * task.
    */
   nextTodoState(taskId) {
+    console.log("Model: advancing TODO state of task with id " + taskId);
 
-  };
+    var nts = this.tasks.map((task) => {
+      if(task.id === taskId) {
+        var newTask = task;
+        newTask.todo = "DONE";
+        newTask.is_done = true;
+        return newTask;
+      }
+
+      else {
+        return task;
+      }
+    });
+
+    this.tasks = nts;
+
+    return this.getTaskById(taskId);
+
+  }
 
   allActiveProjects() {
     return this.projects;
-  };
+  }
 
   allActiveTasks() {
     return this.tasks;
-  };
+  }
 
   allUserTags() {
 
-  };
+  }
 
   allTodoStates() {
 
-  };
+  }
 
   addTask() {
 

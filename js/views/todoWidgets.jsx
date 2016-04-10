@@ -351,12 +351,9 @@ export class Dashboard extends React.Component {
         // FIXME: this transition needs to be fetched from the DB
         // Also, it could possibly be disallowed (e.g. toggling a DONE state)
 
-        var newTasks = this.state.tasks.map(function nextState(task) {
+        var newTasks = this.state.tasks.map((task) => {
             if(task.id === id) {
-                var newTask = task;
-                newTask.todo = "DONE";
-                newTask.is_done = true;
-                return newTask;
+                return this.props.model.nextTodoState(id);
             }
             else {
                 return task;
