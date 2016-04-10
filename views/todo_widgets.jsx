@@ -127,7 +127,7 @@ class TodoListItem extends React.Component {
     }
 }
 
-export class GlobalTodoList extends React.Component {
+class TodoList extends React.Component {
 
     constructor(props) {
         super(props);
@@ -184,22 +184,21 @@ export class GlobalTodoList extends React.Component {
       }.bind(this));
 
       return (
-          <div className="row">
-          <h2 className="sub-heading">All tasks</h2>
-          <p>You currently have an estimated {formatLongMinutes(this.sumMinutes())} worth of tasks.</p>
-          <div className="table-responsive">
-          <table className="table table-stripped">
-          <thead>
-          <tr>
-          <th>#</th>
-          <th>State</th>
-          <th></th>
-          <th><i className="fa fa-clock-o"></i></th>
-          </tr>
-          </thead>
-          <tbody>{rows}</tbody>
-          </table>
-          </div>
+          <div>
+            <p>You currently have an estimated {formatLongMinutes(this.sumMinutes())} worth of tasks.</p>
+            <div className="table-responsive">
+              <table className="table table-stripped">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>State</th>
+                    <th></th>
+                    <th><i className="fa fa-clock-o"></i></th>
+                  </tr>
+                </thead>
+                <tbody>{rows}</tbody>
+              </table>
+            </div>
           </div>
       );
 
@@ -292,29 +291,11 @@ export class TodaysTasksList extends React.Component {
 
     render() {
 
-        var rows = [];
-
-        this.props.tasks.forEach(function(task) {
-            rows.push(<TodoListItem task={task} key={task.id}/>);
-        }.bind(this));
-
         return (
         <div className="row">
             <h2 className="sub-heading">Todays tasks</h2>
             <TodayProgressBar progress={this.getProgressPercentage()}/>
-            <div className="table-responsive">
-              <table className="table table-striped">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>State</th>
-                    <th></th>
-                    <th><i className="fa fa-clock-o"></i></th>
-                  </tr>
-                </thead>
-                <tbody>{rows}</tbody>
-              </table>
-            </div>
+            <TodoList tasks={this.props.tasks}/>
           </div>
     );
     }
@@ -361,5 +342,17 @@ export class ProjectsList extends React.Component {
             </div>
             </div>
         );
+    }
+}
+
+export class GlobalTodoList extends React.Component {
+
+    render() {
+        return(
+            <div className="row">
+            <h2>All tasks</h2>
+            <TodoList tasks={this.props.tasks}/>
+            </div>
+            );
     }
 }
