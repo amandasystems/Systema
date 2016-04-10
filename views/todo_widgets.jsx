@@ -129,48 +129,12 @@ class TodoListItem extends React.Component {
 
 class TodoList extends React.Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            point : null,
-            tasks : props.tasks,
-            uncompletedOnly : false,
-            markedIds : [] };
-
-        /* connect methods as described in
-          https://facebook.github.io/react/docs/reusable-components.html#no-autobinding
-          */
-        this.onTodoChange.bind(this);
-    }
-
-    onTodoChange(id, currentTodo) {
-        console.log("Changed TODO with id " + id + " and state " + currentTodo);
-
-        // FIXME: this transition needs to be fetched from the DB
-        // Also, it could possibly be disallowed (e.g. toggling a DONE state)
-
-        var newTasks = this.state.tasks.map(function nextState(task) {
-            if(task.id === id) {
-                var newTask = task;
-                newTask.todo = "DONE";
-                newTask.is_done = true;
-                return newTask;
-            }
-            else {
-                return task;
-            }});
-
-        this.setState({tasks : newTasks});
-
-    }
-
-    activeTasks() {
-        return this.state.tasks.filter(isNotDone);
+    onTodoChange(id, todo) {
+        this.props.onTodoChange(id, todo);
     }
 
     sumMinutes() {
-        return this.activeTasks().reduce(function(previousValue, task) {
+        return this.props.tasks.reduce(function(previousValue, task) {
             return previousValue + task.effort;
         }, 0);
     }
@@ -178,7 +142,7 @@ class TodoList extends React.Component {
     render() {
       var rows = [];
 
-      this.activeTasks().forEach(function(task) {
+      this.props.tasks.forEach(function(task) {
           rows.push(<TodoListItem task={task} key={task.id}
               onTodoChange={(id, todo) => {this.onTodoChange(id, todo)}} />);
       }.bind(this));
@@ -295,7 +259,8 @@ export class TodaysTasksList extends React.Component {
         <div className="row">
             <h2 className="sub-heading">Todays tasks</h2>
             <TodayProgressBar progress={this.getProgressPercentage()}/>
-            <TodoList tasks={this.props.tasks}/>
+            <TodoList tasks={this.props.tasks}
+            onTodoChange={(id, todo) => {this.props.onTodoChange(id, todo)}}/>
           </div>
     );
     }
@@ -325,7 +290,7 @@ class ProjectItem extends React.Component {
     }
 }
 
-export class ProjectsList extends React.Component {
+class ProjectsList extends React.Component {
     render() {
 
         var items = [];
@@ -345,14 +310,69 @@ export class ProjectsList extends React.Component {
     }
 }
 
-export class GlobalTodoList extends React.Component {
+class GlobalTodoList extends React.Component {
 
     render() {
         return(
             <div className="row">
             <h2>All tasks</h2>
-            <TodoList tasks={this.props.tasks}/>
+            <TodoList tasks={this.props.tasks}
+            onTodoChange={(id, todo) => {this.props.onTodoChange(id, todo)}}/>
             </div>
             );
     }
+}
+
+export class Dashboard extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            point : null,
+            tasks : props.tasks,
+            markedIds : [] };
+
+        /* connect methods as described in
+          https://facebook.github.io/react/docs/reusable-components.html#no-autobinding
+          */
+        this.onTodoChange.bind(this);
+    }
+
+    onTodoChange(id, currentTodo) {
+        console.log("Changed TODO with id " + id + " and state " + currentTodo);
+
+        // FIXME: this transition needs to be fetched from the DB
+        // Also, it could possibly be disallowed (e.g. toggling a DONE state)
+
+        var newTasks = this.state.tasks.map(function nextState(task) {
+            if(task.id === id) {
+                var newTask = task;
+                newTask.todo = "DONE";
+                newTask.is_done = true;
+                return newTask;
+            }
+            else {
+                return task;
+            }});
+
+        this.setState({tasks : newTasks});
+
+    }
+
+    activeTasks() {
+        return this.state.tasks.filter(isNotDone);
+    }
+
+    render() {
+        return (
+            <div>
+            <TodaysTasksList tasks={this.state.tasks}
+            onTodoChange={(id, todo) => {this.onTodoChange(id, todo)}} />
+            <ProjectsList projects={this.props.projects}/>
+            <GlobalTodoList tasks={this.state.tasks}
+            onTodoChange={(id, todo) => {this.onTodoChange(id, todo)}} />
+            </div>
+        );
+    }
+
 }
