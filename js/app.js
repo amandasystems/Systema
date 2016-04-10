@@ -1,4 +1,4 @@
-import {TopNavbar, SideBar, Dashboard} from '../js/views/todo_widgets.jsx';
+import {TopNavbar, SideBar, Dashboard} from '../js/views/todoWidgets.jsx';
 
 var sqlite3 = require('sqlite3').verbose();
 //var jQuery = require('jquery');
