@@ -6,6 +6,7 @@ import pretty from 'pretty-time';
 const REGULAR_TODO = "TODO";
 const REGULAR_DONE = "DONE";
 const TODAY_TAG    = "today";
+const TAG_PREFIX   = '@';
 
 const ENTER_KEY    = 13;
 const ESCAPE_KEY   = 27;
@@ -32,9 +33,19 @@ function hasTag(task, tag) {
     return task.tags.indexOf(tag) !== -1;
 }
 
-
 function capitalizeFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function tagsFromString(str) {
+    var tags = str.split(TAG_PREFIX).splice(1).map(
+        (tag) => {return tag.trim()});
+    console.log(tags);
+    return tags;
+}
+
+function descriptionFromString(str) {
+    return str.split(TAG_PREFIX)[0];
 }
 
 class TodoButton extends React.Component {
@@ -75,7 +86,7 @@ class TodoDescriptionRow extends React.Component {
 
     formatTags() {
         var atTags = this.props.task.tags.map(
-            function concatAt(tag) {return "@" + tag;});
+            function concatAt(tag) {return TAG_PREFIX + tag;});
         return atTags.join(" ");
     }
 
@@ -400,12 +411,15 @@ export class Dashboard extends React.Component {
 	var val = capitalizeFirstLetter(this.state.newTodo.trim());
 
 	if (val) {
-	    this.props.model.addTask(val, "TODO", [], 13);
+	    this.props.model.addTask(
+                descriptionFromString(val),
+                "TODO",
+                tagsFromString(val),
+                13);
 	    this.setState({newTodo: ''});
 	}
 
     }
-
 
     render() {
         return (
