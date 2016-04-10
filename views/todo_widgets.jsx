@@ -145,7 +145,7 @@ class TodoList extends React.Component {
 
       return (
           <div>
-            <p>You currently have an estimated {formatLongMinutes(this.sumMinutes())} worth of tasks.</p>
+            <p>You currently have an estimated {formatLongMinutes(this.sumMinutes())} worth of unfinished tasks.</p>
             <div className="table-responsive">
               <table className="table table-stripped">
                 <thead>
