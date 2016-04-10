@@ -5,6 +5,7 @@ import pretty from 'pretty-time';
 
 const REGULAR_TODO = "TODO";
 const REGULAR_DONE = "DONE";
+const TODAY_TAG    = "today";
 
 function formatMinutes(minutes, fmt) {
     // format is [seconds, nanoseconds]
@@ -22,6 +23,10 @@ function isNotDone(task) {
 
 function isDone(task) {
     return task.is_done;
+}
+
+function hasTag(task, tag) {
+    return task.tags.search(tag) !== -1;
 }
 
 
@@ -149,7 +154,7 @@ export class GlobalTodoList extends React.Component {
             if(task.id === id) {
                 var newTask = task;
                 newTask.todo = "DONE";
-                newTask.isDone = true;
+                newTask.is_done = true;
                 return newTask;
             }
             else {
