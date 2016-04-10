@@ -142,7 +142,7 @@ class TodoList extends React.Component {
     }
 
     render() {
-
+        if(this.props.tasks.length > 0) {
       return (
           <div>
             <p>You currently have an estimated {formatLongMinutes(this.sumMinutes())} worth of unfinished tasks.</p>
@@ -169,6 +169,9 @@ class TodoList extends React.Component {
             </div>
           </div>
       );
+        } else {
+            return <EmptyTodoList/>;
+        }
 
   }
 }
@@ -384,4 +387,10 @@ export class Dashboard extends React.Component {
         );
     }
 
+}
+
+class EmptyTodoList extends React.Component {
+    render() {
+        return <p>This list is empty! Add some new tasks!</p>;
+    }
 }
